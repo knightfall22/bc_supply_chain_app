@@ -1,0 +1,1094 @@
+{
+  "address": "G6jHWjRMTx4Gz98hY1UysdzAvuysutDxVYkvbiKxe2Ak",
+  "metadata": {
+    "name": "scm_program",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "accept_transfer",
+      "discriminator": [94, 249, 171, 62, 208, 120, 49, 110],
+      "accounts": [
+        {
+          "name": "asset",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "product",
+          "writable": true
+        },
+        {
+          "name": "custodian",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "product.organization",
+                "account": "Product"
+              },
+              {
+                "kind": "account",
+                "path": "product.custodian.custodian_wallet",
+                "account": "Product"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "product.organization",
+                "account": "Product"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "event",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101, 118, 101, 110, 116, 95, 97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "product.product_id",
+                "account": "Product"
+              },
+              {
+                "kind": "account",
+                "path": "product.event_index_count",
+                "account": "Product"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mpl_core_program",
+          "address": "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_product",
+      "discriminator": [183, 155, 202, 119, 43, 114, 174, 225],
+      "accounts": [
+        {
+          "name": "asset",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": ["organization"]
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "product",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 114, 111, 100, 117, 99, 116, 95, 97, 99, 99, 111, 117,
+                  110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "arg",
+                "path": "product_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "event",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101, 118, 101, 110, 116, 95, 97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "product_id"
+              },
+              {
+                "kind": "const",
+                "value": [0, 0, 0, 0, 0, 0, 0, 0]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mpl_core_program",
+          "address": "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "product_id",
+          "type": {
+            "array": ["u8", 16]
+          }
+        },
+        {
+          "name": "batch_number",
+          "type": {
+            "array": ["u8", 16]
+          }
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "quantity",
+          "type": "u64"
+        },
+        {
+          "name": "asset_args",
+          "type": {
+            "defined": {
+              "name": "CreateProductAssetArgs"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_seal",
+      "discriminator": [80, 54, 107, 63, 40, 203, 236, 97],
+      "accounts": [
+        {
+          "name": "asset",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": ["organization"]
+        },
+        {
+          "name": "product",
+          "writable": true
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "event",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101, 118, 101, 110, 116, 95, 97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "product.product_id",
+                "account": "Product"
+              },
+              {
+                "kind": "account",
+                "path": "product.event_index_count",
+                "account": "Product"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mpl_core_program",
+          "address": "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": {
+              "name": "CreateAssetArgs"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "initiate_transfer",
+      "discriminator": [128, 229, 77, 5, 65, 234, 228, 75],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "product",
+          "writable": true
+        },
+        {
+          "name": "participant",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "product.organization",
+                "account": "Product"
+              },
+              {
+                "kind": "arg",
+                "path": "address"
+              }
+            ]
+          }
+        },
+        {
+          "name": "custodian",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "product.organization",
+                "account": "Product"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "event",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101, 118, 101, 110, 116, 95, 97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "product.product_id",
+                "account": "Product"
+              },
+              {
+                "kind": "account",
+                "path": "product.event_index_count",
+                "account": "Product"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "address",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "register_organization",
+      "discriminator": [183, 29, 228, 76, 94, 9, 196, 137],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "register_participants",
+      "discriminator": [183, 56, 72, 238, 129, 113, 206, 27],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": ["organization"]
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112, 97, 114, 116, 105, 99, 105, 112, 97, 110, 116, 115, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organization"
+              },
+              {
+                "kind": "arg",
+                "path": "address"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "address",
+          "type": "pubkey"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "role",
+          "type": {
+            "defined": {
+              "name": "Role"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "toggle_verification",
+      "discriminator": [25, 242, 227, 1, 254, 140, 16, 43],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": ["organization"]
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_name",
+      "discriminator": [70, 146, 141, 213, 58, 44, 119, 169],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": ["organization"]
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "update_role",
+      "discriminator": [36, 223, 162, 98, 168, 209, 75, 151],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": ["organization"]
+        },
+        {
+          "name": "organization",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110, 95,
+                  97, 99, 99, 111, 117, 110, 116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "participant",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "role",
+          "type": {
+            "defined": {
+              "name": "Role"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Event",
+      "discriminator": [125, 192, 125, 158, 9, 115, 152, 233]
+    },
+    {
+      "name": "Organization",
+      "discriminator": [145, 38, 152, 251, 91, 57, 118, 160]
+    },
+    {
+      "name": "Participant",
+      "discriminator": [32, 142, 108, 79, 247, 179, 54, 6]
+    },
+    {
+      "name": "Product",
+      "discriminator": [102, 76, 55, 251, 38, 73, 224, 229]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NotCurrentCustodian",
+      "msg": "not current custodian"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidCustodianTransfer",
+      "msg": "invalid transfer"
+    },
+    {
+      "code": 6002,
+      "name": "NotPendingCustodian",
+      "msg": "cannot sign for this product"
+    },
+    {
+      "code": 6003,
+      "name": "NoPendingCustodian",
+      "msg": "no custodian is pending"
+    },
+    {
+      "code": 6004,
+      "name": "NotAuthenticated",
+      "msg": "product is not authenticated"
+    }
+  ],
+  "types": [
+    {
+      "name": "CreateAssetArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "uri",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CreateProductAssetArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "uri",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CustodesInformation",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "participant",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": {
+              "defined": {
+                "name": "Role"
+              }
+            }
+          },
+          {
+            "name": "custodian_wallet",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Event",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "producer",
+            "type": "pubkey"
+          },
+          {
+            "name": "event_index",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "event_type",
+            "type": {
+              "defined": {
+                "name": "EventType"
+              }
+            }
+          },
+          {
+            "name": "product",
+            "type": "pubkey"
+          },
+          {
+            "name": "destination",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EventType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Created"
+          },
+          {
+            "name": "Authenticated"
+          },
+          {
+            "name": "CustodyTransferred"
+          },
+          {
+            "name": "CustodyReceived"
+          },
+          {
+            "name": "CheckPointScan"
+          },
+          {
+            "name": "ProductDelivered"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Organization",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Participant",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "address",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": {
+              "defined": {
+                "name": "Role"
+              }
+            }
+          },
+          {
+            "name": "verified",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Product",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organization",
+            "type": "pubkey"
+          },
+          {
+            "name": "manufacturer",
+            "type": "pubkey"
+          },
+          {
+            "name": "product_id",
+            "type": {
+              "array": ["u8", 16]
+            }
+          },
+          {
+            "name": "batch_number",
+            "type": {
+              "array": ["u8", 16]
+            }
+          },
+          {
+            "name": "quantity",
+            "type": "u64"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "event_index_count",
+            "type": "u64"
+          },
+          {
+            "name": "state",
+            "type": {
+              "defined": {
+                "name": "ProductState"
+              }
+            }
+          },
+          {
+            "name": "pending_custodian",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "custodian",
+            "type": {
+              "defined": {
+                "name": "CustodesInformation"
+              }
+            }
+          },
+          {
+            "name": "authenticated",
+            "type": "bool"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "asset",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProductState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Created"
+          },
+          {
+            "name": "Arrived"
+          },
+          {
+            "name": "InTransit"
+          },
+          {
+            "name": "Delivered"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Role",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Manufacturer"
+          },
+          {
+            "name": "Distributor"
+          },
+          {
+            "name": "Retailer"
+          }
+        ]
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "EVENT_ACCOUNT",
+      "type": "string",
+      "value": "\"event_account\""
+    },
+    {
+      "name": "ORGANIZATION_ACCOUNT",
+      "type": "string",
+      "value": "\"organization_account\""
+    },
+    {
+      "name": "PARTICIPANTS_ACCOUNT",
+      "type": "string",
+      "value": "\"participants_account\""
+    },
+    {
+      "name": "PRODUCT_ACCOUNT",
+      "type": "string",
+      "value": "\"product_account\""
+    },
+    {
+      "name": "SEED",
+      "type": "string",
+      "value": "\"anchor\""
+    }
+  ]
+}
