@@ -1,6 +1,6 @@
-### Supply Chain Tracker App
+## Supply Chain Tracker App
 
-#### Entities
+### Entities
 
 - organization: Represents the company which participants and products are linked to.
 - participants: All participant within an organization; participants can have one of three roles:
@@ -9,4 +9,10 @@
   - Retailer: A non uqnique role representing the destination of a product.
 - product: Products are represented on chain both as an account which serves as a finite state machine and as an NFT.
 
-![sender](assets/entities.png)
+![entities](assets/entities.png)
+
+### Application Flow
+
+![transition flow](assets/supply_chain_flow.png)
+
+![scanning flow](assets/scanning_flow.png)
