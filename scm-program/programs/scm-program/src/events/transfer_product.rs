@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::{CustodesInformation, EVENT_ACCOUNT, Event, EventType, PARTICIPANTS_ACCOUNT, Participant, Product, ProductState, Role, error::CustomError};
+use crate::{CustodesInformation, CustodyAccepted, CustodyTransferredInitiated, EVENT_ACCOUNT, Event, EventType, PARTICIPANTS_ACCOUNT, Participant, Product, ProductDelivered, ProductState, Role, error::CustomError};
 
 use mpl_core::{
     ID as MPL_CORE_ID,
@@ -90,6 +90,13 @@ pub fn process_initiate_transfer(ctx: Context<TransferProduct>, address: Pubkey)
 
    //Increment the event index
    product.event_index_count += 1;
+
+    emit!(CustodyTransferredInitiated {
+        product: product.key(),
+        from: ctx.accounts.custodian.key(),
+        to: ctx.accounts.participant.key(),
+        timestamp: Clock::get()?.unix_timestamp,
+    });
 
     Ok(())
 }
@@ -210,6 +217,26 @@ pub fn process_accept_product(ctx: Context<AcceptProduct>) -> Result<()> {
 
     //Increment the event index
     product.event_index_count += 1;
+
+    match product.state {
+        ProductState::Delivered => {
+            emit!(ProductDelivered{
+                product: product.key(),
+                from: ctx.accounts.custodian.key(),
+                to: ctx.accounts.participant.key(),
+                timestamp: Clock::get()?.unix_timestamp
+            });
+        }
+        ProductState::Arrived => {
+            emit!(CustodyAccepted{
+                product: product.key(),
+                from: ctx.accounts.custodian.key(),
+                to: ctx.accounts.participant.key(),
+                timestamp: Clock::get()?.unix_timestamp
+            });
+        }
+        _ => {}
+    }
 
 
     Ok(())

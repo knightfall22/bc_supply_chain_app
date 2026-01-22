@@ -5,7 +5,7 @@ use mpl_core::{
 };
 
 use crate::{
- EVENT_ACCOUNT, Event, EventType, ORGANIZATION_ACCOUNT, Organization, PARTICIPANTS_ACCOUNT, PRODUCT_ACCOUNT, Participant, Product
+ EVENT_ACCOUNT, Event, EventType, ORGANIZATION_ACCOUNT, Organization, PARTICIPANTS_ACCOUNT, PRODUCT_ACCOUNT, Participant, Product, ProductCreated
 };
 
 #[derive(Accounts)]
@@ -110,6 +110,8 @@ pub fn process_create_product(
         product.custodian.custodian_wallet.as_ref(),
         &[ctx.accounts.participant.bump]
    ];
+
+
     
     let custodian_signer_seeds = [&seeds[..]];
 
@@ -126,6 +128,12 @@ pub fn process_create_product(
     .name(asset_args.name)
     .uri(asset_args.uri)
     .invoke_signed(&custodian_signer_seeds)?;
+
+    emit!(ProductCreated{
+        product: product.key(),
+        by: ctx.accounts.participant.key(),
+        timestamp: Clock::get()?.unix_timestamp
+    });
 
     Ok(())
 }

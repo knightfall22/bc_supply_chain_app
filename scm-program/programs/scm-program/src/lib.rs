@@ -14,7 +14,7 @@ pub use state::*;
 pub use events::*;
 pub use admin::*;
 
-declare_id!("G6jHWjRMTx4Gz98hY1UysdzAvuysutDxVYkvbiKxe2Ak");
+declare_id!("2rXk7FywecFBiQAzSusz6KRKA1CFmb68X757197xEeoW");
 
 #[program]
 pub mod scm_program {

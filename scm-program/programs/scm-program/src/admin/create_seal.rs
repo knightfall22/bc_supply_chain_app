@@ -13,7 +13,7 @@ use crate::{
     Organization,
     PARTICIPANTS_ACCOUNT,
     Participant,
-    Product,
+    Product, ProductAuthenticated,
 };
 
 #[derive(Accounts)]
@@ -72,6 +72,7 @@ pub struct CreateAssetArgs {
 }
 
 pub fn process_create_seal(ctx: Context<CreateSeal>, args: CreateAssetArgs) -> Result<()> {
+
     CreateV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
         .asset(&ctx.accounts.asset)
         .authority(Some(&ctx.accounts.authority.to_account_info()))
@@ -103,6 +104,13 @@ pub fn process_create_seal(ctx: Context<CreateSeal>, args: CreateAssetArgs) -> R
 
     //Increment the event index
     product.event_index_count += 1;
+
+    emit!(ProductAuthenticated{
+            product: ctx.accounts.product.key(),
+            by: ctx.accounts.participant.key(),
+            seal: ctx.accounts.asset.key(),
+            timestamp: Clock::get()?.unix_timestamp
+    });
 
     Ok(())
 }

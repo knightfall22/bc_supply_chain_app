@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/scm_program.json`.
  */
 export type ScmProgram = {
-  address: "G6jHWjRMTx4Gz98hY1UysdzAvuysutDxVYkvbiKxe2Ak";
+  address: "2rXk7FywecFBiQAzSusz6KRKA1CFmb68X757197xEeoW";
   metadata: {
     name: "scmProgram";
     version: "0.1.0";
@@ -1079,6 +1079,28 @@ export type ScmProgram = {
       discriminator: [102, 76, 55, 251, 38, 73, 224, 229];
     },
   ];
+  events: [
+    {
+      name: "custodyAccepted";
+      discriminator: [8, 146, 216, 108, 166, 23, 134, 79];
+    },
+    {
+      name: "custodyTransferredInitiated";
+      discriminator: [200, 240, 210, 32, 196, 18, 156, 156];
+    },
+    {
+      name: "productAuthenticated";
+      discriminator: [152, 255, 88, 69, 246, 56, 85, 107];
+    },
+    {
+      name: "productCreated";
+      discriminator: [41, 64, 29, 113, 18, 124, 58, 82];
+    },
+    {
+      name: "productDelivered";
+      discriminator: [186, 173, 91, 163, 189, 234, 114, 131];
+    },
+  ];
   errors: [
     {
       code: 6000;
@@ -1159,6 +1181,54 @@ export type ScmProgram = {
           {
             name: "custodianWallet";
             type: "pubkey";
+          },
+        ];
+      };
+    },
+    {
+      name: "custodyAccepted";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "product";
+            type: "pubkey";
+          },
+          {
+            name: "from";
+            type: "pubkey";
+          },
+          {
+            name: "to";
+            type: "pubkey";
+          },
+          {
+            name: "timestamp";
+            type: "i64";
+          },
+        ];
+      };
+    },
+    {
+      name: "custodyTransferredInitiated";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "product";
+            type: "pubkey";
+          },
+          {
+            name: "from";
+            type: "pubkey";
+          },
+          {
+            name: "to";
+            type: "pubkey";
+          },
+          {
+            name: "timestamp";
+            type: "i64";
           },
         ];
       };
@@ -1359,6 +1429,74 @@ export type ScmProgram = {
           {
             name: "bump";
             type: "u8";
+          },
+        ];
+      };
+    },
+    {
+      name: "productAuthenticated";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "product";
+            type: "pubkey";
+          },
+          {
+            name: "by";
+            type: "pubkey";
+          },
+          {
+            name: "seal";
+            type: "pubkey";
+          },
+          {
+            name: "timestamp";
+            type: "i64";
+          },
+        ];
+      };
+    },
+    {
+      name: "productCreated";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "product";
+            type: "pubkey";
+          },
+          {
+            name: "by";
+            type: "pubkey";
+          },
+          {
+            name: "timestamp";
+            type: "i64";
+          },
+        ];
+      };
+    },
+    {
+      name: "productDelivered";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "product";
+            type: "pubkey";
+          },
+          {
+            name: "from";
+            type: "pubkey";
+          },
+          {
+            name: "to";
+            type: "pubkey";
+          },
+          {
+            name: "timestamp";
+            type: "i64";
           },
         ];
       };

@@ -7,7 +7,7 @@ skip-lint = false
 
 
 [programs.localnet]
-scm_program = "G6jHWjRMTx4Gz98hY1UysdzAvuysutDxVYkvbiKxe2Ak"
+scm_program = "2rXk7FywecFBiQAzSusz6KRKA1CFmb68X757197xEeoW"
 
 [registry]
 url = "https://api.apr.dev"

@@ -1,5 +1,5 @@
 {
-  "address": "G6jHWjRMTx4Gz98hY1UysdzAvuysutDxVYkvbiKxe2Ak",
+  "address": "2rXk7FywecFBiQAzSusz6KRKA1CFmb68X757197xEeoW",
   "metadata": {
     "name": "scm_program",
     "version": "0.1.0",
@@ -742,6 +742,28 @@
       "discriminator": [102, 76, 55, 251, 38, 73, 224, 229]
     }
   ],
+  "events": [
+    {
+      "name": "CustodyAccepted",
+      "discriminator": [8, 146, 216, 108, 166, 23, 134, 79]
+    },
+    {
+      "name": "CustodyTransferredInitiated",
+      "discriminator": [200, 240, 210, 32, 196, 18, 156, 156]
+    },
+    {
+      "name": "ProductAuthenticated",
+      "discriminator": [152, 255, 88, 69, 246, 56, 85, 107]
+    },
+    {
+      "name": "ProductCreated",
+      "discriminator": [41, 64, 29, 113, 18, 124, 58, 82]
+    },
+    {
+      "name": "ProductDelivered",
+      "discriminator": [186, 173, 91, 163, 189, 234, 114, 131]
+    }
+  ],
   "errors": [
     {
       "code": 6000,
@@ -822,6 +844,54 @@
           {
             "name": "custodian_wallet",
             "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CustodyAccepted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "product",
+            "type": "pubkey"
+          },
+          {
+            "name": "from",
+            "type": "pubkey"
+          },
+          {
+            "name": "to",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CustodyTransferredInitiated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "product",
+            "type": "pubkey"
+          },
+          {
+            "name": "from",
+            "type": "pubkey"
+          },
+          {
+            "name": "to",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
           }
         ]
       }
@@ -1022,6 +1092,74 @@
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProductAuthenticated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "product",
+            "type": "pubkey"
+          },
+          {
+            "name": "by",
+            "type": "pubkey"
+          },
+          {
+            "name": "seal",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProductCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "product",
+            "type": "pubkey"
+          },
+          {
+            "name": "by",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProductDelivered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "product",
+            "type": "pubkey"
+          },
+          {
+            "name": "from",
+            "type": "pubkey"
+          },
+          {
+            "name": "to",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
           }
         ]
       }
