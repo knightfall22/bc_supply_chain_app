@@ -1,6 +1,6 @@
-## Supply Chain Tracker App
+# Supply Chain Tracker App
 
-### Entities
+## Entities
 
 - organization: Represents the company which participants and products are linked to.
 - participants: All participant within an organization; participants can have one of three roles:
@@ -11,8 +11,12 @@
 
 ![entities](assets/entities.png)
 
-### Application Flow
+## Application Flow
+
+### Product Transition Flow
 
 ![transition flow](assets/supply_chain_flow.png)
+
+### Product Scanning flow
 
 ![scanning flow](assets/scanning_flow.png)
